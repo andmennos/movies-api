@@ -1,0 +1,101 @@
+.login {
+  height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  color: #eee;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  &__container {
+    background: #141414;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #333;
+    user-select: none;
+  }
+
+  &__title {
+    font-weight: 900;
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+    margin-bottom: 2rem;
+    color: #e50914; // vermelho icônico Netflix
+    text-shadow: 0 0 3px #e50914;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.3rem;
+  }
+
+  &__label {
+    font-size: 0.9rem;
+    color: #bbb;
+    margin-bottom: 0.3rem;
+    text-align: left;
+    display: block;
+  }
+
+  &__input {
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    background: #222;
+    color: #eee;
+    width: 100%;
+
+    &::placeholder {
+      color: #666;
+    }
+
+    &:focus {
+      outline: none;
+      background: #2a2a2a;
+      box-shadow: 0 0 8px #e50914;
+    }
+  }
+
+  &__button {
+    margin-top: 1rem;
+    padding: 0.85rem;
+    background: #e50914;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.15rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 1.2px;
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.7);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background: #bf0810;
+      box-shadow: 0 7px 20px rgba(191, 8, 16, 0.8);
+    }
+
+    &:disabled {
+      background: #7a0f0f;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+
+  &__error-msg {
+    color: #f44336;
+    font-weight: 600;
+    margin-top: -0.5rem;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+}

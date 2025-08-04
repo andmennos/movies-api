@@ -4,6 +4,8 @@ import { RequestAuth, ResponseAuth } from '../auth/auth.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments.ts/environment';
 
+@Injectable()
+
 export class ApiService {
 
   private readonly baseUrl = environment.baseUrl;
