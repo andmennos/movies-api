@@ -36,7 +36,7 @@
           <div class="movie-title">{{ movie.nome }}</div>
           <div class="movie-subtitle">{{ movie.genero }} | {{ movie.anoLancamento }}</div>
         </div>
-        <button mat-icon-button (click)="toggleFavorite(movie)" [attr.aria-label]="'Favoritar ' + movie.nome">
+        <button mat-icon-button (click)="toggleFavorite(movie)" [attr.aria-label]="'Favoritar ' + movie.nome" matTooltip="Favoritar">
           <mat-icon [ngClass]="{ favorite: isFavorite(movie) }">
             {{ isFavorite(movie) ? 'star' : 'star_border' }}
           </mat-icon>

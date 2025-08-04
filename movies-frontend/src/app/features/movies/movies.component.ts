@@ -3,6 +3,7 @@ import { Movie, RequisicaoMovies, ResponseFilters, ResponseMovies } from './mode
 import { MatPaginator } from '@angular/material/paginator';
 import { MoviesService } from './services/movies.service';
 import { PageEvent } from './models/page-event.model';
+import { FavoriteMoviesService } from '../favorite-movies/services/favorite-movies.service';
 
 @Component({
   selector: 'app-movies',
@@ -24,11 +25,10 @@ export class MoviesComponent implements OnInit {
   pageSize: number = 20;
   totalMovies: number = 0;
 
-  favoriteMoviesIds: Set<number> = new Set();
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private moviesService: MoviesService) { };
+  constructor(private moviesService: MoviesService, 
+    private favoriteService: FavoriteMoviesService) { };
 
   ngOnInit(): void {
     this.loadFilters();
@@ -48,16 +48,14 @@ export class MoviesComponent implements OnInit {
   }
 
   toggleFavorite(movie: Movie) {
-    if(this.favoriteMoviesIds.has(movie.id)) {
-      this.favoriteMoviesIds.delete(movie.id);
-    } else {
-      this.favoriteMoviesIds.add(movie.id)
-    }
+    this.favoriteService.toggleFavorite(movie);
   }
 
   isFavorite(movie: Movie): boolean {
-    return this.favoriteMoviesIds.has(movie.id)
+    return this.favoriteService.isFavorite(movie.id);
   }
+
+  
 
   private loadFilters() {
 
