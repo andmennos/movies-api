@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { RequisicaoMovies, ResponseFilters, ResponseMovies } from '../models/movie.model';
 import { ApiService } from 'src/app/core/api/api.service';
 
@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/core/api/api.service';
   providedIn: 'root'
 })
 export class MoviesService {
+  cashFilters!: ResponseFilters;
   
   constructor(private apiServicec: ApiService) { }
 
@@ -15,6 +16,12 @@ export class MoviesService {
   }
 
   getFilters(): Observable<ResponseFilters> {
-    return this.apiServicec.getFilters();
+    if(this.cashFilters) {
+      return of(this.cashFilters);
+    }
+    
+    return this.apiServicec.getFilters().pipe(
+      tap(filters => this.cashFilters = filters)
+    );
   }
 }

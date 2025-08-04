@@ -24,9 +24,11 @@ export class MoviesComponent implements OnInit {
   pageSize: number = 20;
   totalMovies: number = 0;
 
+  favoriteMoviesIds: Set<number> = new Set();
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private moviesService: MoviesService) { }
+  constructor(private moviesService: MoviesService) { };
 
   ngOnInit(): void {
     this.loadFilters();
@@ -45,6 +47,18 @@ export class MoviesComponent implements OnInit {
     this.loadMovies();
   }
 
+  toggleFavorite(movie: Movie) {
+    if(this.favoriteMoviesIds.has(movie.id)) {
+      this.favoriteMoviesIds.delete(movie.id);
+    } else {
+      this.favoriteMoviesIds.add(movie.id)
+    }
+  }
+
+  isFavorite(movie: Movie): boolean {
+    return this.favoriteMoviesIds.has(movie.id)
+  }
+
   private loadFilters() {
 
     this.moviesService.getFilters().subscribe({
@@ -55,7 +69,7 @@ export class MoviesComponent implements OnInit {
           genero: 'Gênero'
         };
 
-        this.generos = filters.availableGenres;
+        this.generos = filters.availableGenres.sort();
         this.sortOrders = filters.sortOrders
         this.sortFields = filters.availableSortFields.map(field => ({
           label: labels[field] || field,

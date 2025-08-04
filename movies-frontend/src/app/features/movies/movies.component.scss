@@ -8,15 +8,14 @@
     margin-bottom: 2rem;
   }
 
-  &__search {
-    flex: 1;
-    min-width: 200px;
-  }
-
   &__list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1rem;
+  }
+
+  &__paginator {
+    margin-top: 2rem;
   }
 
   .movie-card {
@@ -24,13 +23,36 @@
     color: #fff;
     border: 1px solid #333;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    padding: 1rem;
 
-    mat-card-title {
-      font-weight: bold;
-    }
+    .movie-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
 
-    mat-card-subtitle {
-      color: #aaa;
+      .movie-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .movie-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+
+      .movie-subtitle {
+        font-size: 0.9rem;
+        color: #aaa;
+      }
+
+      button {
+        align-self: flex-start;
+      }
+
+      .favorite {
+        color: #fdd835;
+      }
     }
   }
 }
