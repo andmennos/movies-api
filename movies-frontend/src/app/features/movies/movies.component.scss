@@ -1,0 +1,36 @@
+.movies {
+  padding: 2rem;
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  &__search {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .movie-card {
+    background: #1f1f1f;
+    color: #fff;
+    border: 1px solid #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+
+    mat-card-title {
+      font-weight: bold;
+    }
+
+    mat-card-subtitle {
+      color: #aaa;
+    }
+  }
+}

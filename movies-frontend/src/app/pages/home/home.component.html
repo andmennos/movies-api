@@ -1,1 +1,14 @@
-<p>home works!</p>
+<mat-toolbar color="primary" class="home__toolbar">
+  <span class="home__logo">🎬 Movies Growth</span>
+  <span class="home__spacer"></span>
+  <a mat-button routerLink="/home" routerLinkActive="active-link">Home</a>
+  <a mat-button routerLink="/favoritos" routerLinkActive="active-link">Favoritos</a>
+</mat-toolbar>
+
+<div class="home__content">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="home__footer">
+  <p>© {{ today }} Movies Growth - Todos os direitos reservados.</p>
+</footer>
