@@ -27,8 +27,10 @@ export class MoviesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private moviesService: MoviesService, 
-    private favoriteService: FavoriteMoviesService) { };
+  constructor(
+    private readonly moviesService: MoviesService, 
+    private readonly favoriteService: FavoriteMoviesService
+  ) { }
 
   ngOnInit(): void {
     this.loadFilters();

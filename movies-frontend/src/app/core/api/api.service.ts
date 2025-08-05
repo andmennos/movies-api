@@ -11,7 +11,7 @@ export class ApiService {
 
   private readonly baseUrl = environment.baseUrl;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private readonly httpClient: HttpClient) { }
 
   autenticarLogin(login: RequestAuth): Observable<ResponseAuth> {
     const url = `${this.baseUrl}/auth/login`;
@@ -23,7 +23,7 @@ export class ApiService {
     .set('page', reqMovies.page.toString())
     .set('limit', reqMovies.limit.toString())
     .set('sortBy', reqMovies.sortBy)
-    .set('Order', reqMovies.order)
+    .set('order', reqMovies.order)
     .set('genero', reqMovies.genero)
 
     const url = `${this.baseUrl}/movies`;

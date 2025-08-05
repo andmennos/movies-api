@@ -8,7 +8,7 @@ import { ApiService } from '../api/api.service';
 export class AuthService {
   private readonly TOKEN_ACCESS = 'access_token';
 
-  constructor(private apiService: ApiService) { }
+  constructor(private readonly apiService: ApiService) { }
 
   autenticar(login: RequestAuth): Observable<ResponseAuth> {
     return this.apiService.autenticarLogin(login).pipe(
@@ -26,7 +26,7 @@ export class AuthService {
 
   isLogged() {
     const token = this.getToken();
-    return !!this.getToken();
+    return !!token;
   }
 
   logout() {

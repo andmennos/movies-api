@@ -9,18 +9,18 @@ import { ApiService } from 'src/app/core/api/api.service';
 export class MoviesService {
   cashFilters!: ResponseFilters;
   
-  constructor(private apiServicec: ApiService) { }
+  constructor(private readonly apiService: ApiService) { }
 
   getMovies(reqMovies: RequisicaoMovies): Observable<ResponseMovies> {
-    return this.apiServicec.getMovies(reqMovies);
+    return this.apiService.getMovies(reqMovies);
   }
 
   getFilters(): Observable<ResponseFilters> {
     if(this.cashFilters) {
       return of(this.cashFilters);
     }
-    
-    return this.apiServicec.getFilters().pipe(
+
+    return this.apiService.getFilters().pipe(
       tap(filters => this.cashFilters = filters)
     );
   }

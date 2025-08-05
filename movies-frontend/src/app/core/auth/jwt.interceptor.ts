@@ -13,11 +13,14 @@ import { Router } from '@angular/router';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
-    if(token){
+    if (token) {
       const clone = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`
@@ -26,11 +29,11 @@ export class JwtInterceptor implements HttpInterceptor {
 
       return next.handle(clone).pipe(
         catchError((erro: HttpErrorResponse) => {
-          if(erro.status === 401 || erro.status === 403) {
+          if (erro.status === 401 || erro.status === 403) {
             this.authService.logout();
             this.router.navigate(['/login'])
           }
-          return throwError(()=> erro);
+          return throwError(() => erro);
         })
       )
     }
