@@ -1,0 +1,59 @@
+.favorites {
+  padding: 2rem;
+
+  h2 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .empty-message {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .favorite-card {
+    background: #1f1f1f;
+    color: #fff;
+    border: 1px solid #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+
+    .favorite-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+
+      .movie-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .movie-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+
+      .movie-subtitle {
+        font-size: 0.9rem;
+        color: #aaa;
+      }
+
+      button {
+        align-self: flex-start;
+      }
+    }
+
+    mat-card-content {
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

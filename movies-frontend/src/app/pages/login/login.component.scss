@@ -1,0 +1,65 @@
+.login {
+  height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  color: #eee;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  &__container {
+    background: #141414;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+    max-width: 380px;
+    width: 100%;
+    border: 1px solid #333;
+    text-align: center;
+  }
+
+  &__title {
+    font-weight: 900;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    color: #e50914;
+    text-shadow: 0 0 4px #e50914;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__mat-field {
+    width: 100%;
+
+    ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+      background-color: #222;
+      border-radius: 6px;
+    }
+
+    ::ng-deep .mat-form-field-label {
+      color: #bbb;
+    }
+
+    ::ng-deep input.mat-input-element {
+      color: #eee;
+    }
+
+    ::ng-deep .mat-form-field-ripple {
+      background-color: #e50914;
+    }
+  }
+
+  &__error-msg {
+    color: #f44336;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+}

@@ -1,0 +1,49 @@
+.home {
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    background: #141414;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    padding: 0 1rem;
+
+    .mat-button {
+      color: #fff;
+
+      &.active-link {
+        font-weight: bold;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+    }
+  }
+
+  &__logo {
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: #e50914;
+    text-shadow: 0 0 3px #e50914;
+  }
+
+  &__spacer {
+    flex: 1 1 auto;
+  }
+
+  &__content {
+    min-height: calc(100vh - 112px);
+    padding: 1.5rem;
+    background: #0f2027;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  &__footer {
+    height: 48px;
+    text-align: center;
+    background: #111;
+    color: #aaa;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
