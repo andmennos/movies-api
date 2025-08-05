@@ -1,0 +1,60 @@
+<section class="movies">
+  <div class="movies__controls mat-elevation-z2">
+    <mat-form-field appearance="fill">
+      <mat-label>Gênero</mat-label>
+      <mat-select [(ngModel)]="selectedGenre" (selectionChange)="applyFilters()">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let genero of generos" [value]="genero">{{ genero }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Ordenar por</mat-label>
+      <mat-select [(ngModel)]="selectedSortField" (selectionChange)="applyFilters()">
+        <mat-option *ngFor="let field of sortFields" [value]="field.value">{{ field.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Ordem</mat-label>
+      <mat-select [(ngModel)]="selectedOrder" (selectionChange)="applyFilters()">
+        <mat-option *ngFor="let order of sortOrders" [value]="order">{{ order }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="erro" class="error-message">{{ erro }}</div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <div class="movies__list" *ngIf="!loading && !erro">
+    <mat-card *ngFor="let movie of movies" class="movie-card mat-elevation-z3">
+      <div class="movie-header">
+        <div class="movie-info">
+          <div class="movie-title">{{ movie.nome }}</div>
+          <div class="movie-subtitle">{{ movie.genero }} | {{ movie.anoLancamento }}</div>
+        </div>
+        <button mat-icon-button (click)="toggleFavorite(movie)" [attr.aria-label]="'Favoritar ' + movie.nome" matTooltip="Favoritar">
+          <mat-icon [ngClass]="{ favorite: isFavorite(movie) }">
+            {{ isFavorite(movie) ? 'star' : 'star_border' }}
+          </mat-icon>
+        </button>
+      </div>
+      <mat-card-content>
+        <p>{{ movie.descricao }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="movies__paginator" *ngIf="totalMovies > 0">
+    <mat-paginator
+      [length]="totalMovies"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[10, 20, 50]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+</section>

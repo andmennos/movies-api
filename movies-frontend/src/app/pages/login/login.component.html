@@ -1,0 +1,26 @@
+<div class="login">
+  <div class="login__container">
+    <h1 class="login__title">Movies Growth</h1>
+
+    <form class="login__form" (ngSubmit)="logIn()" #loginForm="ngForm">
+
+      <mat-form-field appearance="fill" class="login__mat-field" floatLabel="always">
+        <mat-label>Usuário</mat-label>
+        <input matInput [(ngModel)]="loginUser.usuario" name="usuario" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="login__mat-field" floatLabel="always">
+        <mat-label>Senha</mat-label>
+        <input matInput [(ngModel)]="loginUser.senha" name="senha" type="password" required />
+      </mat-form-field>
+
+      <div *ngIf="errorMessage" class="login__error-msg">
+        {{ errorMessage }}
+      </div>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid">
+        Entrar
+      </button>
+    </form>
+  </div>
+</div>

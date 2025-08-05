@@ -1,0 +1,24 @@
+<section class="favorites">
+  <h2>Meus Filmes Favoritos</h2>
+
+  <div *ngIf="favoriteMovies.length === 0" class="empty-message">
+    Nenhum filme favorito adicionado.
+  </div>
+
+  <div class="favorites__list" *ngIf="favoriteMovies.length > 0">
+    <mat-card *ngFor="let movie of favoriteMovies" class="favorite-card mat-elevation-z3">
+      <div class="favorite-header">
+        <div class="movie-info">
+          <div class="movie-title">{{ movie.nome }}</div>
+          <div class="movie-subtitle">{{ movie.genero }} | {{ movie.anoLancamento }}</div>
+        </div>
+        <button mat-icon-button (click)="removeFavorite(movie)" aria-label="Remover favorito" matTooltip="Remover dos favoritos">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <mat-card-content>
+        <p>{{ movie.descricao }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>
