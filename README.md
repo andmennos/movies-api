@@ -1,5 +1,7 @@
-# Movies API
-
+### Movies API
+<details>
+  <summary>Documentação API</summary>
+  
 API REST para gerenciar filmes com paginação e ordenação. Inclui documentação interativa com Swagger e autenticação JWT.
 
 ## Instalação
@@ -224,3 +226,167 @@ O projeto usa apenas as dependências essenciais:
 ├── README.md         # Documentação principal
 └── EXAMPLES.md       # Exemplos práticos de uso da API
 ```
+</details>
+
+### Movies Growth Frontend
+<details>
+  <summary>Documentação Frontend</summary>  
+  <br>
+Aplicação web para listagem e gerenciamento de filmes favoritos, utilizando Angular no frontend e Express.js no backend em Movies API com autenticação JWT.
+
+---
+
+## 1. Arquitetura
+
+### 1.1 Estrutura Modular
+
+O projeto segue uma arquitetura **monolítica modular**, baseada em funcionalidades, com divisão clara e organizada de responsabilidades:
+
+- **/core**: Serviços centrais (auth, api, interceptors, guards).
+- **/features**: Funcionalidades organizadas em componentes, cada um com seus serviços e modelos (ex: movies, favorites-movies).
+- **/pages**: Componentes de página (login, home), usados como pontos de entrada no roteamento.
+- **/shared**: Módulo para componentes reutilizáveis e materiais compartilhados.
+
+A estrutura é simples e orientada à escalabilidade: A arquitetura permite a implementação de lazy-loading e a potencial decomposição do frontend em micro-frontends.
+
+---
+
+## 2. Como Executar o Projeto
+
+### 2.1 Backend (API)
+
+Siga as instruções em [Movies API](#movies-api)
+
+### Frontend (Angular)
+
+## Instalação
+Acesse o diretório movies-frontend
+
+```bash
+cd movies-frontend
+```
+e instale com
+
+```bash
+npm install
+```
+
+## Execução:
+```bash
+ng serve -o
+```
+
+A aplicação estará disponível em http://localhost:4200
+
+⚠️ O frontend depende da API estar rodando localmente na porta 3000.
+
+## 3. Decisões Técnicas
+### 3.1 Tecnologias Principais
+
+- **Angular Material**: Utilizado para componentes de UI, como filtros (`MatSelect`) e paginação (`MatPaginator`);
+- **RxJS**: Utilizado para manipulação reativa de dados assíncronos, especialmente em serviços HTTP, gerenciamento de filtros, paginação e tratamento de erros via Observables;
+- **Karma + Jasmine**: Ferramentas para testes unitários automatizados, focando na lógica funcional do frontend.
+
+
+### 3.2 Interceptor JWT
+Foi implementado um JwtInterceptor para injetar automaticamente o token nas requisições autenticadas.
+
+### 3.3 Organização de Filtros e Paginação
+A API /movies/filters fornece os gêneros disponíveis e campos de ordenação válidos. O componente MoviesComponent consome esses dados e armazena localmente os filtros disponíveis.
+
+Ao aplicar filtros ou trocar de página:
+
+O componente monta a query string com os parâmetros necessários.
+
+A API retorna os dados paginados junto com informações de paginação e os filtros aplicados.
+
+A interface atualiza automaticamente com base nesses dados.
+
+## 4. Testes
+### 4.1 Estratégia
+Os testes realizados com Karma e Jasmine, focam na lógica funcional. Evitam validação de templates (ex: router-outlet) e priorizam:
+
+Correta chamada de serviços;
+
+Manipulação de estado interno;
+
+Tratamento de erros;
+
+Comportamento em mudanças de página e filtros.
+
+### 4.2 Execução
+
+```bash
+ng test
+```
+
+### 4.2 Cobertura
+- Statements: 98.38%
+
+- Branches: 83.33%
+
+- Functions: 96%
+
+- Lines: 98.33%
+
+### 4.2.1 Exemplos de Verificações
+MoviesComponent testa:
+
+Carregamento de filtros e filmes no ngOnInit;
+
+Atualização da página e aplicação de filtros;
+
+Interações com FavoriteMoviesService;
+
+Tratamento de falhas da API.
+
+AuthService e JwtInterceptor possuem testes que:
+
+Validam extração e injeção de token;
+
+Confirmam proteção por guardas;
+
+Garantem que as rotas seguras só são acessadas com autenticação válida.
+
+## 5. Estrutura de Pastas
+### 5.1 Frontend (Angular)
+
+```bash
+/app
+├── core/                          # Módulo central com serviços e infraestrutura base
+│   ├── auth/                     # Serviços e funcionalidades de autenticação
+│   │   ├── auth.service.ts       # Serviço para login, logout e controle de sessão
+│   │   ├── auth.guard.ts         # Guarda de rota para proteger rotas que precisam de autenticação
+│   │   └── jwt.interceptor.ts    # Interceptor HTTP que injeta o token JWT nas requisições e interceptação de erros
+│   ├── api/
+│   │   └── api.service.ts        # Serviço genérico para chamadas HTTP à API backend
+│   └── core.module.ts            # Módulo que agrega os providers do core
+├── features/                     # Componentes funcionais do aplicativo, separados por domínio
+│   ├── movies/                   # Funcionalidade de listagem de filmes,  paginação e filtros
+│   │   ├── movies.component.ts  
+│   │   ├── services/
+│   │   │   └── movies.service.ts    # Serviço para consumir API de filmes
+│   │   └── models/
+│   │       └── movie.model.ts        
+│   ├── favorites/                # Funcionalidade de filmes favoritos
+│   │   ├── favorite-list.component.ts  # Componente para listar filmes favoritos
+│   │   ├── services/
+│   │   │   └── favorites.service.ts     # Serviço para gerenciar favoritos (armazenamento local ou backend)
+│   │   └── models/
+│   │       └── favorite.model.ts         
+├── pages/                       # Componentes que representam páginas/rotas principais
+│   ├── login/
+│   │   └── login.component.ts   # Página de login do usuário
+│   └── home/
+│       └── home.component.ts    # Página inicial com layout base, header e footer
+├── shared/                      # Módulo para componentes e módulos compartilhados
+│   └── shared.module.ts         
+├── app-routing.module.ts        # Definição das rotas principais e filhas da aplicação
+├── app.module.ts                # Módulo raiz
+
+```
+
+# 6. Considerações Finais
+O projeto foi construído com foco em objetividade, escalabilidade, clareza de responsabilidades e facilidade de manutenção. A integração entre frontend e backend é modular e testada, com alto índice de cobertura e estrutura preparada para evoluir com novas funcionalidades.
+
+</details>
